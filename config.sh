@@ -15,6 +15,7 @@ LARAVEL_DIR="$CLOUD_HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
 DOMAIN_NAME="mysite.com"
+ADMIN_EMAIL="email@mysite.com"
 
 # ----------------
 # Run commands
