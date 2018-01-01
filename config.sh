@@ -4,8 +4,7 @@
 # Set variables
 # ----------------
 
-CLOUD_INSTALL="$HOME/cloud"
-CLOUD_HOME="$HOME"
+CLOUD_HOME="/root"
 USERNAME="user"
 PASSWORD="password"
 
