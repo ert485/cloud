@@ -23,10 +23,10 @@ tools for cloud servers
 	#cloud-config
 
 	runcmd:
+	  - sudo apt install -y git
 	  - cd /root
-	  - sudo apt install git
 	  - git clone https://github.com/ert485/cloud
 	  - cd cloud
 	  - BOOT_RUN="true"
-	  - . init.sh &
+	  - . init.sh
 	  - BOOT_RUN=""
