@@ -26,4 +26,5 @@ Go to your_ip:8181 in any browser
 
 ## installing more features:
 
+
 When you run `init.sh`, lines uncommented in `config.sh` will run functions defined in `function.sh` 
