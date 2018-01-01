@@ -14,5 +14,5 @@ PASSWORD="password"
 # Run commands
 # ----------------
 
-# sudo apt update
+sudo apt update
 cloud9
