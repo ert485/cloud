@@ -6,30 +6,24 @@ Cloud server startup scripts
 ### vultr - use this setup script
 
 	#!/bin/sh
-
 	export HOME="/root"
 	cd $HOME
 	git clone https://github.com/ert485/cloud
 	cd cloud
-	BOOT_RUN="true"
 	. init.sh
-	BOOT_RUN=""
 
 ### digital ocean - ssh in and run this:
 
 	sudo apt install -y git
 	git clone https://github.com/ert485/cloud
 	cd cloud
-	BOOT_RUN="true"
 	init.sh
-	BOOT_RUN=""
 
 ## accessing cloud9:
 
-Find the IP of your server
-Go to yourIP:8181 in any browser
+Find the IP of your server <br>
+Go to your_ip:8181 in any browser
 
-## modifying config:
+## installing more features:
 
-When you run `init.sh`, lines uncommented in `config.sh` will 
-run functions defined in `function.sh` 
+When you run `init.sh`, lines uncommented in `config.sh` will run functions defined in `function.sh` 

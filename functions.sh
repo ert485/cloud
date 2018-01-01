@@ -14,12 +14,10 @@ aptInstall(){
 cloud9(){
 	installDir="$CLOUD_INSTALL/c9sdk"
 	workingDir="$CLOUD_HOME"
-	port="$1"
+	port="8181"
 	ip="0.0.0.0"
 	username="$USERNAME"
 	password="$PASSWORD"
-
-	setDefault "port" "8181"
 
 	mkdir -p $installDir
 	aptInstall "build-essential"
@@ -29,5 +27,5 @@ cloud9(){
 	git clone git://github.com/c9/core.git $installDir
 	"$installDir/"scripts/install-sdk.sh
 	sudo ufw allow "$port"/tcp
-	nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
+	sudo nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }

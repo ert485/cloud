@@ -6,13 +6,13 @@
 
 CLOUD_INSTALL="$HOME"
 CLOUD_HOME="$HOME"
-USERNAME="user"
-PASSWORD="password"
+USERNAME="root"
+PASSWORD="bE4pqyx" # not secure, change passwords after
 
 
 # ----------------
 # Run commands
 # ----------------
 
-# sudo apt update
-# cloud9
+sudo apt update   
+cloud9
