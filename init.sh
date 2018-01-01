@@ -1,4 +1,5 @@
 #!/bin/bash
 
 . functions.sh
-. config.sh
+. log.sh >/dev/null 2>&1
+

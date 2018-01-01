@@ -1,5 +1,5 @@
 #!/bin/bash
 
 func(){
-echo 6
+echo 5
 }
