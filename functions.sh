@@ -12,7 +12,7 @@ aptInstall(){
 }
 
 cloud9(){
-	installDir="$PWD/c9sdk"
+	installDir="$CLOUD_INSTALL"
 	workingDir="$CLOUD_HOME"
 	port="$1"
 	ip="0.0.0.0"

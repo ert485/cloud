@@ -1,5 +1,11 @@
 #!/bin/bash
 
 set -x
-. config.sh >> log.txt 2>&1
+
+if [ -z "$BOOT_RUN" ];then
+	. config.sh >> log.txt 2>&1
+else
+	. config_boot.sh >> log.txt 2>&1
+fi
+
 set +x
