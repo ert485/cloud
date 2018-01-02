@@ -30,26 +30,12 @@ cloud9(){
 	sudo nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
-# updates any linux repo that contains $1 in the .list filename
-# param $1 (string) search term to look for repos
-# post condition: repos matching $1 will be updated
-# (much faster than a full "apt-get update")
-update_linux_repo() {
-  # find repos containing the parameter (string)
-    repos=$(grep -rl "$1" /etc/apt/sources.list.d)
-  # update each repo
-    for repo in $repos;
-    do
-        sudo apt-get update -o Dir::Etc::sourcelist="$repo" -o Dir::Etc::sourceparts="-"
-    done
-}
-
 # gets php dependencies that are required for Laravel
 function installPHPdependencies(){
   # add repo
     sudo add-apt-repository -y ppa:ondrej/php 
   # update repo
-    update_linux_repo php
+    sudo apt-get update
   # install php packages
     sudo apt-get install -y libapache2-mod-php7.1
     sudo apt-get install -y php7.1-dom

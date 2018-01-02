@@ -1,6 +1,8 @@
 #!/bin/bash
 
 mkdir logs
+LOG_DIR="$PWD/logs"
+
 . functions.sh
 echo "Running init..."
 echo "See install progress at logs/log.txt"
