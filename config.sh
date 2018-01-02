@@ -18,14 +18,12 @@ DOMAIN_NAME="mysite.com"
 ADMIN_EMAIL="email@mysite.com"
 GIT_URL="https:github.com/ert485/allthethings"
 
-mkdir logs
-LOG_DIR="$PWD/logs"
 # ----------------
 # Run commands
 # ----------------
 
-sudo apt update
-cloud9
+# sudo apt update
+# cloud9
 
 # installMysql
 # service mysql stop        # reduce memory used
@@ -33,6 +31,6 @@ cloud9
 # service apache2 stop      # reduce memory used
 # installPHPdependencies
 # getComposer
-# newLaravel
+newLaravel
 # cloneLaravelGit
 # service apache2 start
