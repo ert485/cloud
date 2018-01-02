@@ -136,6 +136,7 @@ function newLaravel(){
     cd $LARAVEL_DIR/..
     rm -rf $LARAVEL_DIR
     laravel -q new $PROJECT_NAME
+    chown -R www-data:www-data $PROJECT_NAME/app/storage
     envConfig
     defaultStringLengthMod
     addAuth
@@ -145,6 +146,7 @@ function cloneLaravelGit(){
   mkdir -p $LARAVEL_DIR
   cd $LARAVEL_DIR/..
   git clone $GIT_URL $PROJECT_NAME
+  chown -R www-data:www-data $PROJECT_NAME/app/storage
   cd $PROJECT_NAME
   cp .env.example .env
   envConfig
