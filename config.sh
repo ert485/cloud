@@ -22,15 +22,15 @@ GIT_URL="https:github.com/ert485/allthethings"
 # Run commands
 # ----------------
 
-# sudo apt update
-# cloud9
+sudo apt update
+cloud9
 
-# installMysql
-# service mysql stop        # reduce memory used
-# setApacheConf
-# service apache2 stop      # reduce memory used
-# installPHPdependencies
-# getComposer
+installMysql
+service mysql stop        # reduce memory used
+setApacheConf
+service apache2 stop      # reduce memory used
+installPHPdependencies
+getComposer
 newLaravel
 # cloneLaravelGit
-# service apache2 start
+service apache2 restart
