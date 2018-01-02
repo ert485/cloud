@@ -86,13 +86,6 @@ function setApacheConf(){
     sudo service apache2 restart
 }
 
-# gets laravel installer
-function laravelInstaller(){
-    composer global require "laravel/installer"  
-    PATH=~/.composer/vendor/bin:$PATH
-    export PATH
-}
-
 # fix database bug (default string length)
 # needs laravel 5.5 project present
 function defaultStringLengthMod(){
@@ -121,4 +114,42 @@ function installMysql(){
 
 function getComposer(){
     curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+}
+
+function addAuth(){
+  cd $LARAVEL_DIR
+  service mysql start
+  php artisan make:auth
+  php artisan migrate:refresh --seed
+}
+
+# gets laravel installer
+function laravelInstaller(){
+    composer global require "laravel/installer"  
+    PATH=~/.composer/vendor/bin:$PATH
+    export PATH
+}
+
+function newLaravel(){
+    laravelInstaller
+    mkdir -p $LARAVEL_DIR
+    cd $LARAVEL_DIR/..
+    rm -rf $LARAVEL_DIR
+    laravel -q new $PROJECT_NAME
+    envConfig
+    defaultStringLengthMod
+    addAuth
+}
+
+function cloneLaravelGit(){
+  mkdir -p $LARAVEL_DIR
+  cd $LARAVEL_DIR/..
+  git clone $GIT_URL $PROJECT_NAME
+  cd $PROJECT_NAME
+  cp .env.example .env
+  envConfig
+  composer update --no-plugins --no-scripts
+  php artisan key:generate
+  service mysql start
+  php artisan migrate
 }
