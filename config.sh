@@ -20,7 +20,6 @@ GIT_URL="https:github.com/ert485/allthethings"
 
 mkdir logs
 LOG_DIR="$PWD/logs"
-
 # ----------------
 # Run commands
 # ----------------
