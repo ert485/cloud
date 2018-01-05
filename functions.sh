@@ -121,7 +121,7 @@ function newLaravel(){
     mkdir -p $LARAVEL_DIR
     cd $LARAVEL_DIR/..
     rm -rf $LARAVEL_DIR
-    laravel -q new $PROJECT_NAME
+    laravel new $PROJECT_NAME
     chown -R www-data:www-data $LARAVEL_DIR/storage
     envConfig
     defaultStringLengthMod
