@@ -16,7 +16,7 @@ MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
 DOMAIN_NAME="mysite.com"
 ADMIN_EMAIL="email@mysite.com"
-GIT_URL="https:github.com/ert485/allthethings"
+GIT_URL="https://github.com/ert485/allthethings"
 
 # ----------------
 # Run commands
