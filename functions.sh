@@ -121,7 +121,10 @@ function newLaravel(){
     mkdir -p $LARAVEL_DIR
     cd $LARAVEL_DIR/..
     rm -rf $LARAVEL_DIR
-    laravel new $PROJECT_NAME
+    
+    faketty () { script -qfc "$(printf "%q " "$@")"; }
+    faketty laravel new $PROJECT_NAME
+    
     chown -R www-data:www-data $LARAVEL_DIR/storage
     envConfig
     defaultStringLengthMod
