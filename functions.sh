@@ -44,6 +44,12 @@ function installPHPdependencies(){
     sudo apt-get install -y php7.1-mysql 
 } 
 
+# Installs apache2
+function installApache2(){
+    apt update
+    apt install -y apache2
+}
+
 # sets apache configs to serve from the appropriate directory
 function setApacheConf(){
     newConfName="$DOMAIN_NAME.conf"
@@ -51,12 +57,10 @@ function setApacheConf(){
     conf="$apacheSitesDir/$newConfName"
     newRoot="$LARAVEL_DIR/public"
     
-    apt update
-    apt install -y apache2
-    
     echo '<VirtualHost *:80>'                 > $conf
     echo -e "\tDocumentRoot" $newRoot         >> $conf
-    echo -e "\tServerAdmin" $ADMIN_EMAIL      >> $conf
+    echo -e "\tServerAdmin $ADMIN_EMAIL"      >> $conf
+    echo -e "\tServerName $DOMAIN_NAME"       >> $conf
     echo -e "\tLogLevel info"                 >> $conf
     echo -e "\tErrorLog ${APACHE_LOG_DIR}/error.log" >> $conf
     echo -e "\tCustomLog ${APACHE_LOG_DIR}/access.log combined" >> $conf
@@ -69,7 +73,6 @@ function setApacheConf(){
   #enable the site, disable default
     sudo a2dissite 000-default; sudo a2ensite $newConfName
     sudo a2enmod rewrite
-    sudo service apache2 restart
 }
 
 # fix database bug (default string length)
@@ -79,7 +82,7 @@ function defaultStringLengthMod(){
     sed -i "/use Illuminate\\\Support\\\ServiceProvider;/ause Illuminate\\\Support\\\Facades\\\Schema;" $LARAVEL_DIR/app/Providers/AppServiceProvider.php
 }
 
-# edit environment config
+# edit laravel environment config
 # needs .env present in $LARAVEL_DIR
 function envConfig(){
     sed -i "/DB_DATABASE=/c\DB_DATABASE=$MYSQL_DATABASE" $LARAVEL_DIR/.env
@@ -95,18 +98,16 @@ function installMysql(){
     echo "mysql-server mysql-server/root_password password $MYSQL_PASS" | sudo debconf-set-selections
     echo "mysql-server mysql-server/root_password_again password $MYSQL_PASS" | sudo debconf-set-selections 
     sudo apt-get -y install mysql-server
-    mysql --user="root" --password="$MYSQL_PASS" --execute="create database $MYSQL_DATABASE"
 }
 
 function getComposer(){
     curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 }
 
+# needs mysql running
 function addAuth(){
   cd $LARAVEL_DIR
-  service mysql start
   php artisan make:auth
-  php artisan migrate:refresh --seed
 }
 
 # gets laravel installer
@@ -116,8 +117,8 @@ function laravelInstaller(){
     export PATH
 }
 
+# needs laravel installer
 function newLaravel(){
-    laravelInstaller
     mkdir -p $LARAVEL_DIR
     cd $LARAVEL_DIR/..
     rm -rf $LARAVEL_DIR
@@ -128,9 +129,14 @@ function newLaravel(){
     chown -R www-data:www-data $LARAVEL_DIR/storage
     envConfig
     defaultStringLengthMod
-    addAuth
 }
 
+# needs composer
+function composerInstall(){
+  composer install --no-plugins --no-scripts
+}
+
+# needs php
 function cloneLaravelGit(){
   mkdir -p $LARAVEL_DIR
   cd $LARAVEL_DIR/..
@@ -139,8 +145,12 @@ function cloneLaravelGit(){
   cd $PROJECT_NAME
   cp .env.example .env
   envConfig
-  composer update --no-plugins --no-scripts
   php artisan key:generate
-  service mysql start
-  php artisan migrate
+}
+
+# needs mysql running
+# needs php
+function migrate(){
+  mysql --user="root" --password="$MYSQL_PASS" --execute="create database $MYSQL_DATABASE"
+  php artisan migrate:refresh --seed
 }

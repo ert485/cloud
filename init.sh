@@ -2,13 +2,15 @@
 
 mkdir logs
 LOG_DIR="$PWD/logs"
+LOG_FILE="install.log"
 
 . functions.sh
 echo "Running init..."
-echo "See install progress at logs/log.txt"
+echo "See install progress at $LOG_DIR/$LOG_FILE"
 
 set -x
-. config.sh >> $LOG_DIR/install.log 2>&1
-echo 'done' >> $LOG_DIR/install.log 2>&1
+date -u >> $LOG_DIR/$LOG_FILE 2>&1
+. config.sh >> $LOG_DIR/$LOG_FILE 2>&1
+echo 'done' >> $LOG_DIR/$LOG_FILE 2>&1
 set +x
 

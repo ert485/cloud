@@ -7,16 +7,16 @@
 CLOUD_INSTALL="$HOME"
 CLOUD_HOME="/var/www"
 USERNAME="root"
-PASSWORD="bE4pqyx" # not secure, change passwords after
+PASSWORD="" # not secure, change passwords after
 
 
-PROJECT_NAME="test"
+PROJECT_NAME=""
 LARAVEL_DIR="$CLOUD_HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
-DOMAIN_NAME="mysite.com"
-ADMIN_EMAIL="email@mysite.com"
-GIT_URL="https:github.com/ert485/allthethings"
+DOMAIN_NAME="domain.com"
+ADMIN_EMAIL="email@mail.com"
+GIT_URL="https://github.com/user/repo"
 
 # ----------------
 # Run commands
@@ -25,12 +25,28 @@ GIT_URL="https:github.com/ert485/allthethings"
 sudo apt update
 cloud9
 
-installMysql
-service mysql stop        # reduce memory used
-setApacheConf
-service apache2 stop      # reduce memory used
-installPHPdependencies
-getComposer
-newLaravel
+# installMysql
+# installApache2
+# setApacheConf
+# installPHPdependencies
+# getComposer
+
+# service apache2 stop      # reduce memory used
+# service mysql stop        # reduce memory used
+# laravelInstaller
+# service apache2 restart
+# service mysql restart
+
+# newLaravel
 # cloneLaravelGit
-service apache2 restart
+
+# service apache2 stop      # reduce memory used
+# service mysql stop        # reduce memory used
+# composerInstall
+# service apache2 restart
+# service mysql restart
+
+# migrate
+
+# addAuth
+
