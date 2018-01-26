@@ -18,6 +18,7 @@ DOMAIN_NAME="domain.com"
 ADMIN_EMAIL="email@mail.com"
 GIT_URL="https://github.com/user/repo"
 
+
 # ----------------
 # Run commands
 # ----------------
