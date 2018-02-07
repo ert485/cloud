@@ -7,7 +7,7 @@
 CLOUD_INSTALL="$HOME"
 CLOUD_HOME="/var/www"
 USERNAME="root"
-PASSWORD="" # not secure, change passwords after
+PASSWORD="bE4pqxe" # not secure, change passwords after
 
 
 PROJECT_NAME=""
