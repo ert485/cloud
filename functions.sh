@@ -133,6 +133,7 @@ function newLaravel(){
 
 # needs composer
 function composerInstall(){
+  cd $LARAVEL_DIR
   composer install --no-plugins --no-scripts
 }
 
