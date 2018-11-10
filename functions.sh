@@ -142,7 +142,7 @@ function cloneLaravelGit(){
   mkdir -p $LARAVEL_DIR
   cd $LARAVEL_DIR/..
   git clone $GIT_URL $PROJECT_NAME
-  chown -R www-data:www-data $LARAVEL_DIR
+  chown -R www-data:www-data $LARAVEL_DIR/..
   cd $PROJECT_NAME
   cp .env.example .env
   envConfig
