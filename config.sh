@@ -10,13 +10,13 @@ USERNAME="root"
 PASSWORD="bE4pqxe" # not secure, change passwords after
 
 
-PROJECT_NAME="project"
+PROJECT_NAME="timelapse-upload"
 LARAVEL_DIR="$CLOUD_HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
-DOMAIN_NAME="domain.com"
-ADMIN_EMAIL="email@mail.com"
-GIT_URL="https://github.com/user/repo"
+DOMAIN_NAME="timelapse.eriktetland.com"
+ADMIN_EMAIL="erik.tetland@gmail.com"
+GIT_URL="https://github.com/ert485/timelapse-upload"
 
 
 # ----------------
@@ -27,24 +27,24 @@ sudo apt update
 cloud9
 
 # installMysql
-# installApache2
-# setApacheConf
-# installPHPdependencies
-# getComposer
+installApache2
+setApacheConf
+installPHPdependencies
+getComposer
 
-# service apache2 stop      # reduce memory used
+service apache2 stop      # reduce memory used
 # service mysql stop        # reduce memory used
-# laravelInstaller
+laravelInstaller
 # service apache2 restart
 # service mysql restart
 
 # newLaravel
-# cloneLaravelGit
+cloneLaravelGit
 
 # service apache2 stop      # reduce memory used
 # service mysql stop        # reduce memory used
-# composerInstall
-# service apache2 restart
+composerInstall
+service apache2 restart
 # service mysql restart
 
 # migrate
