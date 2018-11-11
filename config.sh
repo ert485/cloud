@@ -23,8 +23,8 @@ GIT_URL="https://github.com/ert485/timelapse-upload"
 # Run commands
 # ----------------
 
-sudo apt update
-cloud9
+# sudo apt update
+# cloud9
 
 # installMysql
 installApache2
