@@ -155,3 +155,11 @@ function migrate(){
   mysql --user="root" --password="$MYSQL_PASS" --execute="create database $MYSQL_DATABASE"
   php artisan migrate:refresh --seed
 }
+
+function enableSwap(){
+  dd if=/dev/zero of=/swapfile count=2048 bs=1M
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  echo /swapfile   none    swap    sw    0   0 > /etc/fstab
+}

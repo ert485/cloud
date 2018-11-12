@@ -23,6 +23,8 @@ GIT_URL="https://github.com/user/repo"
 # Run commands
 # ----------------
 
+enableSwap
+
 sudo apt update
 cloud9
 
