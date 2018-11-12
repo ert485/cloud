@@ -135,6 +135,7 @@ function newLaravel(){
 function composerInstall(){
   cd $LARAVEL_DIR
   composer install --no-plugins --no-scripts
+  php artisan key:generate
 }
 
 # needs php
@@ -146,7 +147,6 @@ function cloneLaravelGit(){
   cd $PROJECT_NAME
   cp .env.example .env
   envConfig
-  php artisan key:generate
 }
 
 # needs mysql running
