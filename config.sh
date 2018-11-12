@@ -23,6 +23,8 @@ GIT_URL="https://github.com/ert485/timelapse-upload"
 # Run commands
 # ----------------
 
+# enableSwap
+
 # sudo apt update
 # cloud9
 
