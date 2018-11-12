@@ -28,29 +28,14 @@ GIT_URL="https://github.com/ert485/timelapse-upload"
 # sudo apt update
 # cloud9
 
-# installMysql
 installApache2
 setApacheConf
 installPHPdependencies
+
 getComposer
-
-service apache2 stop      # reduce memory used
-# service mysql stop        # reduce memory used
 laravelInstaller
-# service apache2 restart
-# service mysql restart
-
-# newLaravel
 cloneLaravelGit
-
-# service apache2 stop      # reduce memory used
-# service mysql stop        # reduce memory used
 composerInstall
+
 apt install -y ffmpeg
 service apache2 restart
-# service mysql restart
-
-# migrate
-
-# addAuth
-
