@@ -10,7 +10,7 @@ USERNAME="root"
 PASSWORD="bE4pqxe" # not secure, change passwords after
 
 
-PROJECT_NAME="timelapse-upload"
+PROJECT_NAME="timelapseupload"
 LARAVEL_DIR="$CLOUD_HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
@@ -28,14 +28,15 @@ GIT_URL="https://github.com/ert485/timelapse-upload"
 # sudo apt update
 # cloud9
 
+installMysql
 installApache2
 setApacheConf
 installPHPdependencies
-
 getComposer
 laravelInstaller
 cloneLaravelGit
 composerInstall
+migrate
 
 apt install -y ffmpeg
 service apache2 restart
