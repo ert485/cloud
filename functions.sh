@@ -27,7 +27,7 @@ cloud9(){
 	git clone git://github.com/c9/core.git $installDir
 	"$installDir/"scripts/install-sdk.sh
 	sudo ufw allow "$port"/tcp
-	sudo nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
+	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
 # gets php dependencies that are required for Laravel
