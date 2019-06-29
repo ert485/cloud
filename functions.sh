@@ -15,7 +15,9 @@ golang(){
   aptInstall "golang"
   mkdir -p $HOME/go
   echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
-  go get github.com/stamblerre/gocode
+  echo "export GIT_TERMINAL_PROMPT=1" >> $HOME/.bashrc
+  . $HOME/.bashrc
+  aptInstall "gocode"
 }
 
 cloud9(){
