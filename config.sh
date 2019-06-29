@@ -5,7 +5,7 @@
 # ----------------
 
 CLOUD_INSTALL="$HOME"
-CLOUD_HOME="/var/www"
+CLOUD_HOME="$HOME"
 USERNAME="root"
 PASSWORD="bE4pqxe" # not secure, change passwords after
 
@@ -27,6 +27,7 @@ enableSwap
 
 sudo apt update
 cloud9
+golang
 
 # installMysql
 # installApache2

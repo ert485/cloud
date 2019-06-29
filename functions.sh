@@ -11,6 +11,13 @@ aptInstall(){
 	sudo apt install -y $1
 }
 
+golang(){
+  aptInstall "golang"
+  mkdir -p $HOME/go
+  echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
+  go get github.com/stamblerre/gocode
+}
+
 cloud9(){
 	installDir="$CLOUD_INSTALL/c9sdk"
 	workingDir="$CLOUD_HOME"
@@ -24,7 +31,7 @@ cloud9(){
 	aptInstall "python2.7"
 	aptInstall "nodejs"
 	aptInstall "nodejs-legacy"
-	git clone git://github.com/c9/core.git $installDir
+	git clone git://github.com/ert485/core.git $installDir
 	"$installDir/"scripts/install-sdk.sh
 	sudo ufw allow "$port"/tcp
 	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
