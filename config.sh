@@ -28,6 +28,7 @@ enableSwap
 sudo apt update
 cloud9
 golang
+certbot
 theia
 
 # installMysql
