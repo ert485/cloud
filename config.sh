@@ -35,6 +35,7 @@ golangInstall
 certbotConfig
 theiaBuild
 setTheiaApacheConf
+setC9ApacheConf
 service apache2 restart
 
 # installMysql
