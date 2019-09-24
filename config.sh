@@ -17,6 +17,9 @@ MYSQL_PASS=$PASSWORD
 DOMAIN_NAME="domain.com"
 ADMIN_EMAIL="email@mail.com"
 GIT_URL="https://github.com/user/repo"
+GIT_NAME="John Doe"
+GIT_EMAIL=$ADMIN_EMAIL
+
 
 
 # ----------------
@@ -26,6 +29,7 @@ GIT_URL="https://github.com/user/repo"
 enableSwap
 
 sudo apt update
+setupGit
 cloud9
 golang
 certbot

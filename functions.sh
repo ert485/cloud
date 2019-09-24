@@ -39,6 +39,12 @@ cloud9(){
 	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
+setupGit(){
+  git config --global user.name $GIT_NAME
+  git config --global user.email $GIT_EMAIL
+  git config --global user.credential cache
+}
+
 certbot(){
 	externalIP=`curl ifconfig.me`
 	apt-get install -y software-properties-common python-software-properties
