@@ -39,7 +39,7 @@ cloud9(){
 	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
-cerbot(){
+certbot(){
 	externalIP=`curl ifconfig.me`
 	apt-get install -y software-properties-common python-software-properties
 	add-apt-repository -y ppa:certbot/certbot
