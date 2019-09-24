@@ -94,8 +94,45 @@ function installApache2(){
     apt install -y apache2
 }
 
-# sets apache configs to serve from the appropriate directory
-function setApacheConf(){
+function setTheiaApacheConf(){
+    newConfName="$DOMAIN_NAME-theia.conf"
+    apacheSitesDir="/etc/apache2/sites-available"
+    conf="$apacheSitesDir/$newConfName"
+    echo '<IfModule mod_ssl.c>'                 > $conf
+    echo -e "\t<VirtualHost _default_ *:8843>"      >> $conf
+    echo -e "\t\t<Location / >"                 >> $conf
+    echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
+    echo -e "\t\t\tAuthType Basic"                 >> $conf
+    echo -e "\t\t\tAuthUserFile /var/www/html/.htpasswd"                 >> $conf
+    echo -e "\t\t\tRequire valid-user"                 >> $conf
+    echo -e "\t\t</Location>"                 >> $conf
+    echo -e "\t\tRewriteEngine on"                 >> $conf
+    echo -e "\t\tRewriteCond %{HTTP:Upgrade} websocket [NC]"                 >> $conf
+    echo -e "\t\tRewriteCond %{HTTP:Connection} upgrade [NC]"                 >> $conf
+    echo -e "\t\tRewriteRule .* \"ws://localhost:3000%{REQUEST_URI}\" [P]"                 >> $conf
+    echo -e "\t\tProxyPreserveHost On"                 >> $conf
+    echo -e "\t\tProxyPass \"/\" \"http://localhost:3000/\""                 >> $conf
+    echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
+    echo -e "\t\tProxyRequests off"                 >> $conf
+    echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
+    echo -e "\t\tServerName $DOMAIN_NAME"
+    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem"                 >> $conf
+    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem"                 >> $conf
+    echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
+    echo -e "\t</VirtualHost>"                 >> $conf
+    echo -e "</IfModule>"                 >> $conf
+    echo -e "Listen 8443"                 >> $conf
+    mkdir -p /var/www/html
+    htpasswd -b -c /var/www/html/.htpasswd theia $PASSWORD
+    sudo a2enmod proxy_http
+    sudo a2enmod rewrite
+    sudo a2enmod ssl
+    sudo a2enmod proxy
+    sudo a2ensite $newConfName
+}
+
+# sets apache configs to serve from the appropriate directory for laravel
+function setLaravelApacheConf(){
     newConfName="$DOMAIN_NAME.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"

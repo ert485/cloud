@@ -34,10 +34,12 @@ cloud9
 golang
 certbot
 theia
+setTheiaApacheConf
+service apache2 restart
 
 # installMysql
 # installApache2
-# setApacheConf
+# setLaravelApacheConf
 # installPHPdependencies
 # getComposer
 
