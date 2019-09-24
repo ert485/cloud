@@ -30,6 +30,22 @@ cloud9(){
 	sudo nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
+
+theia(){
+	installDir="$CLOUD_INSTALL/theia"
+	mkdir -p $installDir
+	sudo apt remove -y nodejs
+	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+	aptInstall "nodejs"
+	aptInstall "pkg-config"
+	aptInstall "libx11-dev libxkbfile-dev libxkbfile-dev"
+	git clone https://github.com/eclipse-theia/theia $installDir
+	oldPwd=`pwd`
+	cd $installDir
+	yarn
+	cd $oldPwd
+}
+
 # gets php dependencies that are required for Laravel
 function installPHPdependencies(){
   # add repo

@@ -7,7 +7,7 @@
 CLOUD_INSTALL="$HOME"
 CLOUD_HOME="/var/www"
 USERNAME="root"
-PASSWORD="" # not secure, change passwords after
+PASSWORD="be4qaxe" # not secure, change passwords after
 
 
 PROJECT_NAME=""
@@ -23,8 +23,9 @@ GIT_URL="https://github.com/user/repo"
 # Run commands
 # ----------------
 
-sudo apt update
+# sudo apt update
 cloud9
+theia
 
 # installMysql
 # installApache2
