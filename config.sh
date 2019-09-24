@@ -30,10 +30,10 @@ enableSwap
 
 sudo apt update
 setupGit
-cloud9
-golang
-certbot
-theia
+cloud9Run
+golangInstall
+certbotConfig
+theiaBuild
 setTheiaApacheConf
 service apache2 restart
 

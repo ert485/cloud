@@ -11,7 +11,7 @@ aptInstall(){
 	sudo apt install -y $1
 }
 
-golang(){
+golangInstall(){
   aptInstall "golang"
   mkdir -p $HOME/go
   echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
@@ -20,7 +20,7 @@ golang(){
   aptInstall "gocode"
 }
 
-cloud9(){
+cloud9Run(){
 	installDir="$CLOUD_INSTALL/c9sdk"
 	workingDir="$CLOUD_HOME"
 	port="8181"
@@ -45,7 +45,7 @@ setupGit(){
   git config --global user.credential cache
 }
 
-certbot(){
+certbotConfig(){
 	externalIP=`curl ifconfig.me`
 	apt-get install -y software-properties-common python-software-properties
 	add-apt-repository -y ppa:certbot/certbot
@@ -55,7 +55,7 @@ certbot(){
 }
 
 
-theia(){
+theiaBuild(){
 	installDir="$CLOUD_INSTALL/theia"
 	mkdir -p $installDir
 	sudo apt remove -y nodejs
