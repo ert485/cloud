@@ -48,6 +48,10 @@ theia(){
 	aptInstall "nodejs"
 	aptInstall "pkg-config"
 	aptInstall "libx11-dev libxkbfile-dev libxkbfile-dev"
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  sudo apt update
+  aptInstall yarn
 	git clone https://github.com/eclipse-theia/theia $installDir
 	oldPwd=`pwd`
 	cd $installDir
