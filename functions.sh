@@ -45,6 +45,7 @@ certbot(){
 	add-apt-repository -y ppa:certbot/certbot
 	apt-get update
 	apt-get install -y python-certbot-apache
+	certbot --apache -d $DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
 }
 
 
