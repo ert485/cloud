@@ -5,12 +5,16 @@
 # ----------------
 
 CLOUD_INSTALL="$HOME"
-CLOUD_HOME="/var/www"
+CLOUD_HOME="$HOME"
 USERNAME="root"
+<<<<<<< HEAD
 PASSWORD="be4qaxe" # not secure, change passwords after
+=======
+PASSWORD="bE4pqxe" # not secure, change passwords after
+>>>>>>> 7d209ef9c9794e84898fdc825ea2fdb0d340a42a
 
 
-PROJECT_NAME=""
+PROJECT_NAME="project"
 LARAVEL_DIR="$CLOUD_HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
@@ -23,8 +27,11 @@ GIT_URL="https://github.com/user/repo"
 # Run commands
 # ----------------
 
-# sudo apt update
+enableSwap
+
+sudo apt update
 cloud9
+golang
 theia
 
 # installMysql

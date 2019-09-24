@@ -11,6 +11,15 @@ aptInstall(){
 	sudo apt install -y $1
 }
 
+golang(){
+  aptInstall "golang"
+  mkdir -p $HOME/go
+  echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
+  echo "export GIT_TERMINAL_PROMPT=1" >> $HOME/.bashrc
+  . $HOME/.bashrc
+  aptInstall "gocode"
+}
+
 cloud9(){
 	installDir="$CLOUD_INSTALL/c9sdk"
 	workingDir="$CLOUD_HOME"
@@ -24,10 +33,10 @@ cloud9(){
 	aptInstall "python2.7"
 	aptInstall "nodejs"
 	aptInstall "nodejs-legacy"
-	git clone git://github.com/c9/core.git $installDir
+	git clone git://github.com/ert485/core.git $installDir
 	"$installDir/"scripts/install-sdk.sh
 	sudo ufw allow "$port"/tcp
-	sudo nohup node "$installDir/"server.js -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
+	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
 }
 
 
@@ -149,7 +158,9 @@ function newLaravel(){
 
 # needs composer
 function composerInstall(){
+  cd $LARAVEL_DIR
   composer install --no-plugins --no-scripts
+  php artisan key:generate
 }
 
 # needs php
@@ -157,11 +168,10 @@ function cloneLaravelGit(){
   mkdir -p $LARAVEL_DIR
   cd $LARAVEL_DIR/..
   git clone $GIT_URL $PROJECT_NAME
-  chown -R www-data:www-data $LARAVEL_DIR/storage
+  chown -R www-data:www-data $LARAVEL_DIR
   cd $PROJECT_NAME
   cp .env.example .env
   envConfig
-  php artisan key:generate
 }
 
 # needs mysql running
@@ -169,4 +179,12 @@ function cloneLaravelGit(){
 function migrate(){
   mysql --user="root" --password="$MYSQL_PASS" --execute="create database $MYSQL_DATABASE"
   php artisan migrate:refresh --seed
+}
+
+function enableSwap(){
+  dd if=/dev/zero of=/swapfile count=2048 bs=1M
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  echo /swapfile   none    swap    sw    0   0 > /etc/fstab
 }

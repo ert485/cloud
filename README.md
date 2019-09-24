@@ -1,5 +1,5 @@
 # Cloud
-Cloud server startup scripts
+VPS server startup scripts
 
 ## Running server setup (installs cloud9)
 
