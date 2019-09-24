@@ -71,6 +71,7 @@ theiaBuild(){
 	oldPwd=`pwd`
 	cd $installDir
 	yarn
+	nohup yarn run start:browser &
 	cd $oldPwd
 }
 
@@ -128,6 +129,7 @@ function setTheiaApacheConf(){
     sudo a2enmod rewrite
     sudo a2enmod ssl
     sudo a2enmod proxy
+    sudo a2enmod proxy_wstunnel
     sudo a2ensite $newConfName
 }
 
