@@ -52,6 +52,8 @@ certbotConfig(){
 	apt-get update
 	apt-get install -y python-certbot-apache
 	certbot --apache -d $DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
+	certbot --apache -d theia$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
+	certbot --apache -d c9$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
 }
 
 
@@ -95,12 +97,44 @@ function installApache2(){
     apt install -y apache2
 }
 
-function setTheiaApacheConf(){
-    newConfName="$DOMAIN_NAME-theia.conf"
+
+function setC9ApacheConf(){
+    newConfName="c9$DOMAIN_NAME.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"
     echo '<IfModule mod_ssl.c>'                 > $conf
-    echo -e "\t<VirtualHost _default_ *:8843>"      >> $conf
+    echo -e "\t<VirtualHost *:8443>"      >> $conf
+    echo -e "\t\t<Location / >"                 >> $conf
+    echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
+    echo -e "\t\t\tAuthType Basic"                 >> $conf
+    echo -e "\t\t\tAuthUserFile /var/www/html/.htpasswd"                 >> $conf
+    echo -e "\t\t\tRequire valid-user"                 >> $conf
+    echo -e "\t\t</Location>"                 >> $conf
+    echo -e "\t\tProxyPreserveHost On"                 >> $conf
+    echo -e "\t\tProxyPass \"/\" \"http://localhost:3000/\""                 >> $conf
+    echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
+    echo -e "\t\tProxyRequests off"                 >> $conf
+    echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
+    echo -e "\t\tServerName c9$DOMAIN_NAME"
+    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/c9$DOMAIN_NAME/fullchain.pem"                 >> $conf
+    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/c9$DOMAIN_NAME/privkey.pem"                 >> $conf
+    echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
+    echo -e "\t</VirtualHost>"                 >> $conf
+    echo -e "</IfModule>"                 >> $conf
+    echo -e "Listen 8443"                 >> $conf
+    mkdir -p /var/www/html
+    htpasswd -b -c /var/www/html/.htpasswd c9 $PASSWORD
+    sudo a2enmod proxy_http
+    sudo a2enmod ssl
+    sudo a2enmod proxy
+    sudo a2ensite $newConfName
+}
+function setTheiaApacheConf(){
+    newConfName="theia$DOMAIN_NAME.conf"
+    apacheSitesDir="/etc/apache2/sites-available"
+    conf="$apacheSitesDir/$newConfName"
+    echo '<IfModule mod_ssl.c>'                 > $conf
+    echo -e "\t<VirtualHost *:8443>"      >> $conf
     echo -e "\t\t<Location / >"                 >> $conf
     echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
     echo -e "\t\t\tAuthType Basic"                 >> $conf
@@ -116,9 +150,9 @@ function setTheiaApacheConf(){
     echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
     echo -e "\t\tProxyRequests off"                 >> $conf
     echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
-    echo -e "\t\tServerName $DOMAIN_NAME"
-    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem"                 >> $conf
-    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem"                 >> $conf
+    echo -e "\t\tServerName theia$DOMAIN_NAME"
+    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/theia$DOMAIN_NAME/fullchain.pem"                 >> $conf
+    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/theia$DOMAIN_NAME/privkey.pem"                 >> $conf
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
     echo -e "\t</VirtualHost>"                 >> $conf
     echo -e "</IfModule>"                 >> $conf
