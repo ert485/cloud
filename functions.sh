@@ -182,7 +182,7 @@ function migrate(){
 }
 
 function enableSwap(){
-  dd if=/dev/zero of=/swapfile count=2048 bs=1M
+  dd if=/dev/zero of=/swapfile count=4096 bs=1M
   chmod 600 /swapfile
   mkswap /swapfile
   swapon /swapfile
