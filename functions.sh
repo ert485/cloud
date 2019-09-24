@@ -115,7 +115,7 @@ function setC9ApacheConf(){
     echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
     echo -e "\t\tProxyRequests off"                 >> $conf
     echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
-    echo -e "\t\tServerName c9$DOMAIN_NAME"
+    echo -e "\t\tServerName c9$DOMAIN_NAME"  >> $conf
     echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/c9$DOMAIN_NAME/fullchain.pem"                 >> $conf
     echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/c9$DOMAIN_NAME/privkey.pem"                 >> $conf
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
@@ -150,7 +150,7 @@ function setTheiaApacheConf(){
     echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
     echo -e "\t\tProxyRequests off"                 >> $conf
     echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
-    echo -e "\t\tServerName theia$DOMAIN_NAME"
+    echo -e "\t\tServerName theia$DOMAIN_NAME" >> $conf
     echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/theia$DOMAIN_NAME/fullchain.pem"                 >> $conf
     echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/theia$DOMAIN_NAME/privkey.pem"                 >> $conf
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
