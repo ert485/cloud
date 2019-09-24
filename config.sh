@@ -7,11 +7,7 @@
 CLOUD_INSTALL="$HOME"
 CLOUD_HOME="$HOME"
 USERNAME="root"
-<<<<<<< HEAD
 PASSWORD="be4qaxe" # not secure, change passwords after
-=======
-PASSWORD="bE4pqxe" # not secure, change passwords after
->>>>>>> 7d209ef9c9794e84898fdc825ea2fdb0d340a42a
 
 
 PROJECT_NAME="project"
