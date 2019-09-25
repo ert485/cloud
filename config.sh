@@ -19,7 +19,8 @@ SUBDOMAIN="w1"
 DOMAIN_NAME=$SUBDOMAIN.$BASE_DOMAIN
 ADMIN_EMAIL=mail@domain.com
 GIT_URL="https://github.com/user/repo"
-GIT_NAME="John Doe"
+GIT_F_NAME="John"
+GIT_L_NAME="Doe"
 GIT_EMAIL=$ADMIN_EMAIL
 
 GODADDY_AUTH="asdf:fdsa"
