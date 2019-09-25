@@ -32,8 +32,8 @@ GODADDY_SHOPPER_ID="01234567"
 # ----------------
 putAllDNS
 enableSwap
-
-sudo apt update
+installApache2
+setPasswords
 setupGit
 cloud9Run
 certbotConfig
@@ -41,9 +41,9 @@ setC9ApacheConf
 service apache2 restart
 golangInstall
 theiaBuild
-setPasswords
 setTheiaApacheConf
 service apache2 restart
+
 
 
 # installMysql
