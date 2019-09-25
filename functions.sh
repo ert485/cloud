@@ -22,7 +22,6 @@ golangInstall(){
 
 cloud9Run(){
 	installDir="$CLOUD_INSTALL/c9sdk"
-	workingDir="$CLOUD_HOME"
 	port="8181"
 	ip="0.0.0.0"
 	username="$USERNAME"
@@ -36,7 +35,7 @@ cloud9Run(){
 	git clone git://github.com/ert485/core.git $installDir
 	"$installDir/"scripts/install-sdk.sh
 	sudo ufw allow "$port"/tcp
-	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w "$workingDir" -a "$username:$password" &
+	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w / -a "$username:$password" &
 }
 
 setupGit(){
