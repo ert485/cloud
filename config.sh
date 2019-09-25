@@ -6,17 +6,17 @@
 
 CLOUD_INSTALL="$HOME"
 USERNAME="root"
-PASSWORD=emHDTq6
+PASSWORD=changetosecurepassword
 
 
 PROJECT_NAME="project"
 LARAVEL_DIR="$HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
-DOMAIN_NAME=09-24.tetl.ca
-ADMIN_EMAIL=erik.tetland@gmail.com
+DOMAIN_NAME=domain.com
+ADMIN_EMAIL=mail@domain.com
 GIT_URL="https://github.com/user/repo"
-GIT_NAME="Erik Tetland"
+GIT_NAME="John Doe"
 GIT_EMAIL=$ADMIN_EMAIL
 
 
@@ -33,6 +33,7 @@ cloud9Run
 golangInstall
 certbotConfig
 theiaBuild
+setPasswords
 setTheiaApacheConf
 setC9ApacheConf
 service apache2 restart
