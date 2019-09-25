@@ -18,22 +18,25 @@ ADMIN_EMAIL=mail@domain.com
 GIT_URL="https://github.com/user/repo"
 GIT_NAME="John Doe"
 GIT_EMAIL=$ADMIN_EMAIL
+BASE_DOMAIN="base.com"
+GODADDY_AUTH="asdf:fdsa"
+GODADDY_SHOPPER_ID="01234567"
 
 
 
 # ----------------
 # Run commands
 # ----------------
-
+putAllDNS
 enableSwap
 
 sudo apt update
 setupGit
 cloud9Run
 setC9ApacheConf
+certbotConfig
 service apache2 restart
 golangInstall
-certbotConfig
 theiaBuild
 setPasswords
 setTheiaApacheConf
