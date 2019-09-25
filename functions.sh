@@ -11,20 +11,21 @@ aptInstall(){
 	sudo apt install -y $1
 }
 
-putAllDNS($subdomain, $externalIP){
-	putDNS $1, $2;
-	putDNS "c9.$1", $2);
-	putDNS "th.$1", $2);
+putAllDNS(){
+  externalIP=`curl ifconfig.me`
+	putDNS $SUBDOMAIN $externalIP
+	putDNS "c9.$SUBDOMAIN" $externalIP
+	putDNS "th.$SUBDOMAIN" $externalIP
 }
 
 putDNS(){
 	curl -X PUT \
 	https://api.godaddy.com/v1/domains/$BASE_DOMAIN/records/A/$1 \
-	-H 'Authorization: sso-key $GODADDY_AUTH' \
+	-H 'Authorization: sso-key '$GODADDY_AUTH \
 	-H 'Content-Type: application/json' \
-	-H 'X-Shopper-Id: $GODADDY_SHOPPER_ID' \
+	-H 'X-Shopper-Id: '$GODADDY_SHOPPER_ID \
 	-H 'accept: application/json' \
-	-d '[ { \"data\": \"'$2'\", \"name\": \"'$1'\", \"priority\": 0, \"ttl\": 1800, \"type\": \"A\" }]'
+	-d '[ { "data": "'$2'", "name": "'$1'", "priority": 0, "ttl": 1800, "type": "A" }]'
 }
 
 golangInstall(){
@@ -118,8 +119,12 @@ function setC9ApacheConf(){
     newConfName="$c9Domain.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"
-    echo '<IfModule mod_ssl.c>'                 > $conf
-    echo -e "\t<VirtualHost *:8443>"      >> $conf
+    echo '<VirtualHost *:80>'                 > $conf
+    echo 'ServerName '$c9Domain                 >> $conf
+    echo 'Redirect permanent / https://'$c9Domain'/'                 >> $conf
+    echo '</VirtualHost>'                 >> $conf
+    echo '<IfModule mod_ssl.c>'                 >> $conf
+    echo -e "\t<VirtualHost *:443>"      >> $conf
     echo -e "\t\t<Location / >"                 >> $conf
     echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
     echo -e "\t\t\tAuthType Basic"                 >> $conf
@@ -137,12 +142,13 @@ function setC9ApacheConf(){
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
     echo -e "\t</VirtualHost>"                 >> $conf
     echo -e "</IfModule>"                 >> $conf
-    echo -e "Listen 8443"                 >> $conf
     mkdir -p /var/www/html
     sudo a2enmod proxy_http
     sudo a2enmod ssl
     sudo a2enmod proxy
     sudo a2ensite $newConfName
+    sudo a2dissite 000-default-le-ssl.conf
+    sudo a2dissite 000-default.conf
 }
 function setPasswords(){
 	mkdir -p /var/www/html
@@ -154,8 +160,12 @@ function setTheiaApacheConf(){
     newConfName="$theiaDomain.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"
-    echo '<IfModule mod_ssl.c>'                 > $conf
-    echo -e "\t<VirtualHost *:8443>"      >> $conf
+    echo '<VirtualHost *:80>'                 > $conf
+    echo 'ServerName '$theiaDomain                 >> $conf
+    echo 'Redirect permanent / https://'$theiaDomain'/'                 >> $conf
+    echo '</VirtualHost>'                 >> $conf
+    echo '<IfModule mod_ssl.c>'                 >> $conf
+    echo -e "\t<VirtualHost *:443>"      >> $conf
     echo -e "\t\t<Location / >"                 >> $conf
     echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
     echo -e "\t\t\tAuthType Basic"                 >> $conf
@@ -177,7 +187,6 @@ function setTheiaApacheConf(){
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
     echo -e "\t</VirtualHost>"                 >> $conf
     echo -e "</IfModule>"                 >> $conf
-    echo -e "Listen 8443"                 >> $conf
     
     sudo a2enmod proxy_http
     sudo a2enmod rewrite
@@ -185,6 +194,8 @@ function setTheiaApacheConf(){
     sudo a2enmod proxy
     sudo a2enmod proxy_wstunnel
     sudo a2ensite $newConfName
+    sudo a2dissite 000-default-le-ssl.conf
+    sudo a2dissite 000-default.conf
 }
 
 # sets apache configs to serve from the appropriate directory for laravel

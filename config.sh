@@ -13,12 +13,15 @@ PROJECT_NAME="project"
 LARAVEL_DIR="$HOME/$PROJECT_NAME"
 MYSQL_DATABASE=$PROJECT_NAME
 MYSQL_PASS=$PASSWORD
-DOMAIN_NAME=domain.com
+BASE_DOMAIN="base.com"
+
+SUBDOMAIN="w1"
+DOMAIN_NAME=$SUBDOMAIN.$BASE_DOMAIN
 ADMIN_EMAIL=mail@domain.com
 GIT_URL="https://github.com/user/repo"
 GIT_NAME="John Doe"
 GIT_EMAIL=$ADMIN_EMAIL
-BASE_DOMAIN="base.com"
+
 GODADDY_AUTH="asdf:fdsa"
 GODADDY_SHOPPER_ID="01234567"
 
@@ -33,8 +36,8 @@ enableSwap
 sudo apt update
 setupGit
 cloud9Run
-setC9ApacheConf
 certbotConfig
+setC9ApacheConf
 service apache2 restart
 golangInstall
 theiaBuild
