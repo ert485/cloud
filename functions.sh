@@ -11,6 +11,22 @@ aptInstall(){
 	sudo apt install -y $1
 }
 
+putAllDNS($subdomain, $externalIP){
+	putDNS $1, $2;
+	putDNS "c9.$1", $2);
+	putDNS "th.$1", $2);
+}
+
+putDNS(){
+	curl -X PUT \
+	https://api.godaddy.com/v1/domains/$BASE_DOMAIN/records/A/$1 \
+	-H 'Authorization: sso-key $GODADDY_AUTH' \
+	-H 'Content-Type: application/json' \
+	-H 'X-Shopper-Id: $GODADDY_SHOPPER_ID' \
+	-H 'accept: application/json' \
+	-d '[ { \"data\": \"'$2'\", \"name\": \"'$1'\", \"priority\": 0, \"ttl\": 1800, \"type\": \"A\" }]'
+}
+
 golangInstall(){
   aptInstall "golang"
   mkdir -p $HOME/go
