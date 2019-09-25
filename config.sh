@@ -30,13 +30,15 @@ enableSwap
 sudo apt update
 setupGit
 cloud9Run
+setC9ApacheConf
+service apache2 restart
 golangInstall
 certbotConfig
 theiaBuild
 setPasswords
 setTheiaApacheConf
-setC9ApacheConf
 service apache2 restart
+
 
 # installMysql
 # installApache2
