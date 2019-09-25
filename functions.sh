@@ -51,8 +51,8 @@ certbotConfig(){
 	apt-get update
 	apt-get install -y python-certbot-apache
 	certbot --apache -d $DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
-	certbot --apache -d theia$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
-	certbot --apache -d c9$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
+	certbot --apache -d th.$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
+	certbot --apache -d c9.$DOMAIN_NAME -n --agree-tos --email $ADMIN_EMAIL --redirect
 }
 
 
@@ -98,7 +98,8 @@ function installApache2(){
 
 
 function setC9ApacheConf(){
-    newConfName="c9$DOMAIN_NAME.conf"
+    c9Domain=c9.$DOMAIN_NAME
+    newConfName="$c9Domain.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"
     echo '<IfModule mod_ssl.c>'                 > $conf
@@ -114,22 +115,27 @@ function setC9ApacheConf(){
     echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:8181/\""                 >> $conf
     echo -e "\t\tProxyRequests off"                 >> $conf
     echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
-    echo -e "\t\tServerName c9$DOMAIN_NAME"  >> $conf
-    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/c9$DOMAIN_NAME/fullchain.pem"                 >> $conf
-    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/c9$DOMAIN_NAME/privkey.pem"                 >> $conf
-    echo -e "\t\tInclude /etc/letsencrypt/options-ssl-ap ache.conf"                 >> $conf
+    echo -e "\t\tServerName $c9Domain"  >> $conf
+    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/$c9Domain/fullchain.pem"                 >> $conf
+    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/$c9Domain/privkey.pem"                 >> $conf
+    echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
     echo -e "\t</VirtualHost>"                 >> $conf
     echo -e "</IfModule>"                 >> $conf
     echo -e "Listen 8443"                 >> $conf
     mkdir -p /var/www/html
-    htpasswd -b -c /var/www/html/.htpasswd c9 $PASSWORD
     sudo a2enmod proxy_http
     sudo a2enmod ssl
     sudo a2enmod proxy
     sudo a2ensite $newConfName
 }
+function setPasswords(){
+	mkdir -p /var/www/html
+	htpasswd -b -c /var/www/html/.htpasswd root $PASSWORD
+	echo "root:$PASSWORD"|chpasswd
+}
 function setTheiaApacheConf(){
-    newConfName="theia$DOMAIN_NAME.conf"
+    theiaDomain=th.$DOMAIN_NAME
+    newConfName="$theiaDomain.conf"
     apacheSitesDir="/etc/apache2/sites-available"
     conf="$apacheSitesDir/$newConfName"
     echo '<IfModule mod_ssl.c>'                 > $conf
@@ -149,15 +155,14 @@ function setTheiaApacheConf(){
     echo -e "\t\tProxyPassReverse \"/\" \"http://localhost:3000/\""                 >> $conf
     echo -e "\t\tProxyRequests off"                 >> $conf
     echo -e "\t\tServerAdmin $ADMIN_EMAIL"                 >> $conf
-    echo -e "\t\tServerName theia$DOMAIN_NAME" >> $conf
-    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/theia$DOMAIN_NAME/fullchain.pem"                 >> $conf
-    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/theia$DOMAIN_NAME/privkey.pem"                 >> $conf
+    echo -e "\t\tServerName $theiaDomain" >> $conf
+    echo -e "\t\tSSLCertificateFile /etc/letsencrypt/live/$theiaDomain/fullchain.pem"                 >> $conf
+    echo -e "\t\tSSLCertificateKeyFile /etc/letsencrypt/live/$theiaDomain/privkey.pem"                 >> $conf
     echo -e "\t\tInclude /etc/letsencrypt/options-ssl-apache.conf"                 >> $conf
     echo -e "\t</VirtualHost>"                 >> $conf
     echo -e "</IfModule>"                 >> $conf
     echo -e "Listen 8443"                 >> $conf
-    mkdir -p /var/www/html
-    htpasswd -b -c /var/www/html/.htpasswd theia $PASSWORD
+    
     sudo a2enmod proxy_http
     sudo a2enmod rewrite
     sudo a2enmod ssl
