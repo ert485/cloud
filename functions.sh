@@ -302,9 +302,8 @@ function migrate(){
 }
 
 function enableSwap(){
-  dd if=/dev/zero of=/swapfile count=4096 bs=1M
-  chmod 600 /swapfile
-  mkswap /swapfile
-  swapon /swapfile
-  echo /swapfile   none    swap    sw    0   0 > /etc/fstab
+  install -c $CLOUD_INSTALL/cloud/services/enableswap.service /etc/systemd/system/
+  install -c $CLOUD_INSTALL/cloud/services/enableswap.bash /etc/systemd/system/
+  systemctl enable enableswap
+  systemctl start enableswap
 }

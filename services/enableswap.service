@@ -1,0 +1,12 @@
+[Unit]
+Description=Enable swap
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+User=root
+ExecStart=/bin/bash /etc/systemd/system/enableswap.bash
+
+[Install]
+WantedBy=multi-user.target
