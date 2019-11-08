@@ -1,0 +1,12 @@
+[Unit]
+Description=Thiea web IDE
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+User=root
+ExecStart=/bin/bash /etc/systemd/system/theia.bash 
+
+[Install]
+WantedBy=multi-user.target

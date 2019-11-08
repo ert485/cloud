@@ -38,7 +38,7 @@ golangInstall(){
 }
 
 readOnlyFix(){
-	install -c $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
+	install $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
 	systemctl enable readonlyfix
 	systemctl start readonlyfix
 }
@@ -46,8 +46,8 @@ readOnlyFix(){
 cloud9Run(){
   which gcc || aptInstall build-essential
   which python || aptInstall python
-  install -c $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
-  install -c $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
+  install $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
+  install $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
   systemctl enable c9sdk
   systemctl start c9sdk
 }
@@ -82,12 +82,11 @@ theiaBuild(){
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   sudo apt update
   aptInstall yarn
-	git clone https://github.com/eclipse-theia/theia $installDir
-	oldPwd=`pwd`
-	cd $installDir
-	yarn
-	nohup yarn run start:browser &
-	cd $oldPwd
+	install $CLOUD_INSTALL/cloud/theia/package.json $CLOUD_INSTALL/theia/
+	install $CLOUD_INSTALL/cloud/theia/theia.service /etc/systemd/system/
+	install $CLOUD_INSTALL/cloud/theia/theia.bash /etc/systemd/system/
+  systemctl enable theia
+  systemctl start theia
 }
 
 # gets php dependencies that are required for Laravel
