@@ -33,6 +33,7 @@ GODADDY_SHOPPER_ID="01234567"
 # ----------------
 putAllDNS
 enableSwap
+readOnlyFix
 installApache2
 setPasswords
 setupGit

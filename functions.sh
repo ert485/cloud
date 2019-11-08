@@ -37,22 +37,17 @@ golangInstall(){
   aptInstall "gocode"
 }
 
-cloud9Run(){
-	installDir="$CLOUD_INSTALL/c9sdk"
-	port="8181"
-	ip="0.0.0.0"
-	username="$USERNAME"
-	password="$PASSWORD"
+readOnlyFix(){
+	cp $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
+	sudo systemctl enable readonlyfix
+	sudo systemctl start readonlyfix
+}
 
-	mkdir -p $installDir
-	aptInstall "build-essential"
-	aptInstall "python2.7"
-	aptInstall "nodejs"
-	aptInstall "nodejs-legacy"
-	git clone git://github.com/ert485/core.git $installDir
-	"$installDir/"scripts/install-sdk.sh
-	sudo ufw allow "$port"/tcp
-	sudo nohup node "$installDir/"server.js --collab -p "$port" -l "$ip" -w / -a "$username:$password" &
+cloud9Run(){
+	cp $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
+	cp $CLOUD_INSTALL/cloud/services/c9sdk.bash /etc/systemd/system/
+	sudo systemctl enable c9sdk
+	sudo systemctl start c9sdk
 }
 
 setupGit(){

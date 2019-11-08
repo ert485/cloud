@@ -1,0 +1,12 @@
+[Unit]
+Description=Fix readonly filesystem on startup error
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/bin/mount -o rw,remount / 
+
+[Install]
+WantedBy=multi-user.target
