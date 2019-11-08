@@ -46,8 +46,8 @@ readOnlyFix(){
 cloud9Run(){
   which gcc || aptInstall build-essential
   which python || aptInstall python
-  install $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
-  install $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
+  install $CLOUD_INSTALL/cloud/opt/c9/c9sdk.service /etc/systemd/system/
+  install $CLOUD_INSTALL/cloud/opt/c9/c9sdk.bash /etc/systemd/system/
   systemctl enable c9sdk
   systemctl start c9sdk
 }
@@ -82,9 +82,9 @@ theiaBuild(){
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   sudo apt update
   aptInstall yarn
-	install $CLOUD_INSTALL/cloud/theia/package.json $CLOUD_INSTALL/theia/
-	install $CLOUD_INSTALL/cloud/theia/theia.service /etc/systemd/system/
-	install $CLOUD_INSTALL/cloud/theia/theia.bash /etc/systemd/system/
+	install $CLOUD_INSTALL/cloud/opt/theia/package.json $CLOUD_INSTALL/theia/
+	install $CLOUD_INSTALL/cloud/opt/theia/theia.service /etc/systemd/system/
+	install $CLOUD_INSTALL/cloud/opt/theia/theia.bash /etc/systemd/system/
   systemctl enable theia
   systemctl start theia
 }

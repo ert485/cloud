@@ -6,7 +6,7 @@ Type=simple
 Restart=always
 RestartSec=10
 User=root
-ExecStart=/bin/bash /etc/systemd/system/c9sdk-start.bash 
+ExecStart=/bin/bash /etc/systemd/system/c9sdk.bash 
 
 [Install]
 WantedBy=multi-user.target
