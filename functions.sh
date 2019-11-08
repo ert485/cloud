@@ -44,8 +44,8 @@ readOnlyFix(){
 }
 
 cloud9Run(){
-	cp $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
-	cp $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
+	install -c $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
+	install -c $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
 	sudo systemctl enable c9sdk
 	sudo systemctl start c9sdk
 }
