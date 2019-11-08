@@ -38,7 +38,7 @@ golangInstall(){
 }
 
 readOnlyFix(){
-	cp $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
+	install -c $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
 	sudo systemctl enable readonlyfix
 	sudo systemctl start readonlyfix
 }
