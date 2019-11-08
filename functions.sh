@@ -8,7 +8,7 @@ setDefault(){
 }
 
 aptInstall(){
-	sudo apt install -y $1
+	apt install -y $1
 }
 
 putAllDNS(){
@@ -39,15 +39,17 @@ golangInstall(){
 
 readOnlyFix(){
 	install -c $CLOUD_INSTALL/cloud/services/readonlyfix.service /etc/systemd/system/
-	sudo systemctl enable readonlyfix
-	sudo systemctl start readonlyfix
+	systemctl enable readonlyfix
+	systemctl start readonlyfix
 }
 
 cloud9Run(){
-	install -c $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
-	install -c $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
-	sudo systemctl enable c9sdk
-	sudo systemctl start c9sdk
+  which gcc || aptInstall build-essential
+  which python || aptInstall python
+  install -c $CLOUD_INSTALL/cloud/services/c9sdk.service /etc/systemd/system/
+  install -c $CLOUD_INSTALL/cloud/services/c9sdk-start.bash /etc/systemd/system/
+  systemctl enable c9sdk
+  systemctl start c9sdk
 }
 
 setupGit(){
