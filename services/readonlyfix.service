@@ -3,7 +3,7 @@ Description=Fix readonly filesystem on startup error
 StartLimitIntervalSec=0
 [Service]
 Type=simple
-Restart=always
+Restart=on-failure
 RestartSec=1
 User=root
 ExecStart=/bin/mount -o rw,remount / 

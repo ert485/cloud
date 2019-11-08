@@ -4,7 +4,7 @@
 # Set variables
 # ----------------
 
-CLOUD_INSTALL="$HOME"
+CLOUD_INSTALL="/opt/cloud"
 USERNAME="root"
 PASSWORD=changetosecurepassword
 
@@ -31,8 +31,8 @@ GODADDY_SHOPPER_ID="01234567"
 # ----------------
 # Run commands
 # ----------------
-putAllDNS
 enableSwap
+putAllDNS
 readOnlyFix
 installApache2
 setPasswords
