@@ -4,7 +4,7 @@
 # Set variables
 # ----------------
 
-CLOUD_INSTALL="/opt/cloud"
+CLOUD_INSTALL="/opt"
 USERNAME="root"
 PASSWORD=changetosecurepassword
 
