@@ -124,7 +124,7 @@ function setC9ApacheConf(){
     echo -e "\t\t<Location / >"                 >> $conf
     echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
     echo -e "\t\t\tAuthType Basic"                 >> $conf
-    echo -e "\t\t\tAuthUserFile /var/www/html/.htpasswd"                 >> $conf
+    echo -e "\t\t\tAuthUserFile /var/www/.htpasswd"                 >> $conf
     echo -e "\t\t\tRequire valid-user"                 >> $conf
     echo -e "\t\t</Location>"                 >> $conf
     echo -e "\t\tProxyPreserveHost On"                 >> $conf
@@ -148,7 +148,7 @@ function setC9ApacheConf(){
 }
 function setPasswords(){
 	mkdir -p /var/www/html
-	htpasswd -b -c /var/www/html/.htpasswd root $PASSWORD
+	htpasswd -b -c /var/www/.htpasswd root $PASSWORD
 	echo "root:$PASSWORD"|chpasswd
 }
 function setTheiaApacheConf(){
@@ -165,7 +165,7 @@ function setTheiaApacheConf(){
     echo -e "\t\t<Location / >"                 >> $conf
     echo -e "\t\t\tAuthName \"Protected Area\""                 >> $conf
     echo -e "\t\t\tAuthType Basic"                 >> $conf
-    echo -e "\t\t\tAuthUserFile /var/www/html/.htpasswd"                 >> $conf
+    echo -e "\t\t\tAuthUserFile /var/www/.htpasswd"                 >> $conf
     echo -e "\t\t\tRequire valid-user"                 >> $conf
     echo -e "\t\t</Location>"                 >> $conf
     echo -e "\t\tRewriteEngine on"                 >> $conf
