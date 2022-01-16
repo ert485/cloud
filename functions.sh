@@ -55,7 +55,7 @@ cloud9Run(){
 setupGit(){
   git config --global user.name "$GIT_F_NAME $GIT_L_NAME"
   git config --global user.email $GIT_EMAIL
-  git config --global credential.helper cache
+  git config --global credential.helper store
 }
 
 certbotConfig(){
