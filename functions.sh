@@ -29,7 +29,7 @@ putDNS(){
 }
 
 golangInstall(){
-  aptInstall "golang"
+  aptInstall "golang-go"
   mkdir -p $HOME/go
   echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
   echo "export GIT_TERMINAL_PROMPT=1" >> $HOME/.bashrc
