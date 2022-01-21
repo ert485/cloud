@@ -21,7 +21,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 
 " set vim init file
 mkdir -p  ~/.config/nvim
-mv ~/starting_files/init.vim ~/.config/nvim/init.vim 
+cp ~/starting_files/init.vim ~/.config/nvim/init.vim 
 
 export GOBIN=$HOME/go/bin                  
 export PATH=$PATH:$GOBIN
@@ -58,4 +58,4 @@ vim internal/device/example/main.go
 # ** check that gd (go to definition) works
 
 " update bash init file
-cat ~/.starting_files/.bashrc > ~/.bashrc
+cp ~/starting_files/.bashrc ~/.bashrc
