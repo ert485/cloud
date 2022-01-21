@@ -26,12 +26,12 @@ cp ~/starting_files/init.vim ~/.config/nvim/init.vim
 export GOBIN=$HOME/go/bin                  
 export PATH=$PATH:$GOBIN
 
-vim +PlugInstall
-vim +GoInstallBinaries
-vim +CocInstall coc-json
-
 vim
 #### ** inside vim:
+# (there will be warnings on the first run, before PlugInstall is ran)
+# :PlugInstall
+# :GoInstallBinaries
+# :CocInstall coc-json
 #	:CocConfig
 #		save with the following:
 #			{
