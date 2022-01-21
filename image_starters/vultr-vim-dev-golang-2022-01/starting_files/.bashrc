@@ -106,3 +106,6 @@ export GIT_TERMINAL_PROMPT=1
 # ert485 - add gobin to path
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
+
+# ert485 - default to using nvim
+alias vim=nvim
