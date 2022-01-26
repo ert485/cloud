@@ -11,16 +11,39 @@ write_files:
                   }
           }
         }
-runcmd:
-  - curl -L https://github.com/neovim/neovim/releases/download/v0.6.1/nvim.appimage -o nvim && chmod u+x nvim && mv nvim /usr/bin
-  - curl -Lo /root/.config/nvim/init.vim  --create-dirs https://raw.githubusercontent.com/ert485/cloud/master/image_starters/vultr-vim-dev-golang-2022-01/starting_files/init.vim
-  - curl -Lo /root/.bashrc https://raw.githubusercontent.com/ert485/cloud/master/image_starters/vultr-vim-dev-golang-2022-01/starting_files/.bashrc
-  - curl -sLo install-node install-node.vercel.app/lts && chmod +x install-node && ./install-node -y && rm install-node
-  - curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  - vim +'PlugInstall --sync' +GoInstallBinaries +'CocInstall coc-json' +qa
+  - path: /root/.bashrc
+    append: true
+    content: |
+        
+        # ert485 - allow git to ask for a password (if you want to use personal access tokens instead of SSH)
+        export GIT_TERMINAL_PROMPT=1
+
+        # ert485 - add gobin to path
+        export GOBIN=$HOME/go/bin
+        export PATH=$PATH:$GOBIN
+        
+        # ert485 - default to using nvim
+        alias vim=nvim
+        
+        # ert485 - add golang to path
+        export PATH=$PATH:/usr/local/go/bin
 package_upgrade: true
 packages:
-  - golang-go
+  - git
+  - gcc
+runcmd:
+  - export HOME=/root
+  - export GOPATH=$HOME/go
+  - export GOBIN=$GOPATH/bin
+  - alias vim=nvim
+  - export PATH=$PATH:$GOBIN:/usr/local/go/bin
+  - curl -L https://github.com/neovim/neovim/releases/download/v0.6.1/nvim.appimage -o nvim && chmod u+x nvim && mv nvim /usr/bin
+  - curl -Lo /root/.config/nvim/init.vim  --create-dirs https://raw.githubusercontent.com/ert485/cloud/master/image_starters/vultr-vim-dev-golang-2022-01/starting_files/init.vim
+  - curl -sLo install-node install-node.vercel.app/lts && chmod +x install-node && ./install-node -y && rm install-node
+  - curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  - curl -Lo go1.17.6.linux-amd64.tar.gz https://go.dev/dl/go1.17.6.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz && rm go1.17.6.linux-amd64.tar.gz
+  - vim +'PlugInstall --sync' +qa
+  - vim +GoInstallBinaries +'CocInstall coc-json' +qa
 power_state:
   timeout: 300
   delay: "+1"
