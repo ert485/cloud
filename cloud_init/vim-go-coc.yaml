@@ -45,7 +45,7 @@ runcmd:
   - vim +'PlugInstall --sync' +qa
   - vim +GoInstallBinaries +'CocInstall coc-json' +qa
 power_state:
-  timeout: 300
+  timeout: 600
   delay: "+1"
   message: Rebooting in one minute.
   mode: reboot
