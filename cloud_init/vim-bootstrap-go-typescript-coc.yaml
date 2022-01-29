@@ -33,13 +33,12 @@ write_files:
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         " color scheme
         Plug 'doums/darcula'
-  - path:     content: |
-
 package_upgrade: true
 packages:
   - git
   - gcc
   - make
+  - python3-pip
 runcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
@@ -54,6 +53,7 @@ runcmd:
   - curl -Lo go1.17.6.linux-amd64.tar.gz https://go.dev/dl/go1.17.6.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz && rm go1.17.6.linux-amd64.tar.gz
   - vim +'PlugInstall --sync' +qa
   - vim +GoInstallBinaries +'CocInstall coc-json' +qa
+  - python3 -m pip install pynvim
 power_state:
   timeout: 300
   delay: "+1"
