@@ -60,7 +60,7 @@ runcmd:
   - vim +GoInstallBinaries +'CocInstall coc-json' +qa
   - python3 -m pip install pynvim
 power_state:
-  timeout: 300
+  timeout: 600
   delay: "+1"
   message: Rebooting in one minute.
   mode: reboot
