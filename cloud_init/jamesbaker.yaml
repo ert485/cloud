@@ -42,6 +42,7 @@ runcmd:
   - curl -L https://github.com/neovim/neovim/releases/download/v0.6.1/nvim.appimage -o nvim && chmod u+x nvim && mv nvim /usr/bin
   - curl -Lo /root/.config/nvim/init.vim  --create-dirs https://raw.githubusercontent.com/jamesbaker1901/vim-go-ide/master/init.vim
   - curl -sLo install-node install-node.vercel.app/lts && chmod +x install-node && ./install-node -y && rm install-node
+  - npm install --global yarn
   - python3 -m pip install pynvim
   - curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   - curl -Lo go1.17.6.linux-amd64.tar.gz https://go.dev/dl/go1.17.6.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz && rm go1.17.6.linux-amd64.tar.gz
