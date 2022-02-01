@@ -1,9 +1,4 @@
 #cloud-config
-# NOT STABLE
-#   crashes consistently - to reproduce:
-#     - open vim
-#     - gd (go to definition) on fmt.Println()
-#     - keep going to various definitions in the fmt package, and/or use ^i and ^o (jump forward/back)
 write_files:
   - path: /root/.config/nvim/coc-settings.json
     content: |
