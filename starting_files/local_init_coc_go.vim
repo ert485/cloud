@@ -143,3 +143,10 @@ let g:go_def_mapping_enabled = 0
 " ert485 - enable syntax highlighting for functions names and function calls
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
+
+" ert485 - revert tab in normal mode to the original use
+nunmap <Tab>
+
+" ert485 - jk exits insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
