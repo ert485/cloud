@@ -31,7 +31,7 @@ package_upgrade: true
 packages:
   - git
   - gcc
-runcmd:
+bootcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
   - export GOBIN=$GOPATH/bin
