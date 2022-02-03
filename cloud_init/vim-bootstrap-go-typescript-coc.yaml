@@ -39,7 +39,7 @@ packages:
   - gcc
   - make
   - python3-pip
-runcmd:
+bootcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
   - export GOBIN=$GOPATH/bin
