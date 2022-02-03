@@ -33,7 +33,7 @@ packages:
   - python3-pip
   - ripgrep
   - fzf
-runcmd:
+bootcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
   - export GOBIN=$GOPATH/bin
