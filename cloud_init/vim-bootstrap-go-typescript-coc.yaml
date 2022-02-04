@@ -54,6 +54,9 @@ bootcmd:
   - vim +'PlugInstall --sync' +qa
   - vim +GoInstallBinaries +'CocInstall coc-json' +qa
   - python3 -m pip install pynvim
+  - vim +'CocInstall -sync coc-tsserver' +qa
+  - vim +'CocInstall -sync coc-angular' +qa
+  - npm install -g @angular/cli
 power_state:
   timeout: 600
   delay: "+1"
