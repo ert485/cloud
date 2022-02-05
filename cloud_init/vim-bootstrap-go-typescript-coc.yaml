@@ -58,6 +58,7 @@ bootcmd:
   - vim +'CocInstall -sync coc-tsserver' +qa
   - vim +'CocInstall -sync coc-angular' +qa
   - npm install -g @angular/cli
+  - ufw allow 80
 power_state:
   timeout: 600
   delay: "+1"
