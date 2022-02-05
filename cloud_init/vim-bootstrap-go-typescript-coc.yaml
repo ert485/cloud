@@ -39,6 +39,7 @@ packages:
   - gcc
   - make
   - python3-pip
+  - watchman
 bootcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
