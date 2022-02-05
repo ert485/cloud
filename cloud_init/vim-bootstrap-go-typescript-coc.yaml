@@ -40,7 +40,7 @@ packages:
   - make
   - python3-pip
   - watchman
-bootcmd:
+runcmd:
   - export HOME=/root
   - export GOPATH=$HOME/go
   - export GOBIN=$GOPATH/bin
