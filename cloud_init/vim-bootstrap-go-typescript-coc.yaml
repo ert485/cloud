@@ -59,6 +59,7 @@ runcmd:
   - vim +'CocInstall -sync coc-angular' +qa
   - npm install -g @angular/cli
   - ufw allow 80
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 power_state:
   timeout: 600
   delay: "+1"
