@@ -1,16 +1,4 @@
 #cloud-config
-write_files:
-  - path: /root/.config/nvim/coc-settings.json
-    content: |
-        {
-          "languageserver": {
-                  "golang": {
-                          "command": "gopls",
-                          "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-                          "filetypes": ["go"]
-                  }
-          }
-        }
   - path: /root/.bashrc
     append: true
     content: |
@@ -52,16 +40,8 @@ runcmd:
   - curl -sLo install-node install-node.vercel.app/lts && chmod +x install-node && ./install-node -y && rm install-node
   - curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   - curl -Lo go1.18.4.linux-amd64.tar.gz https://go.dev/dl/go1.18.4.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz && rm go1.18.4.linux-amd64.tar.gz
-  - vim +'PlugInstall --sync' +qa
-  - vim +GoInstallBinaries +'CocInstall coc-json' +qa
+  - vim --headless +PlugInstall +'CocInstall coc-go' +GoInstallBinaries +'CocInstall coc-json' +'CocInstall -sync coc-angular' +'CocInstall -sync coc-tsserver' +qa
   - python3 -m pip install pynvim
-  - vim +'CocInstall -sync coc-tsserver' +qa
-  - vim +'CocInstall -sync coc-angular' +qa
   - npm install -g @angular/cli
   - ufw allow 80
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-power_state:
-  timeout: 600
-  delay: "+1"
-  message: Rebooting in one minute.
-  mode: reboot
