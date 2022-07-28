@@ -51,7 +51,7 @@ runcmd:
   - curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=nvim&langs=go&langs=typescript' > /root/.config/nvim/init.vim
   - curl -sLo install-node install-node.vercel.app/lts && chmod +x install-node && ./install-node -y && rm install-node
   - curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  - curl -Lo go1.18.3.linux-amd64.tar.gz https://go.dev/dl/go1.18.3.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz && rm go1.18.3.linux-amd64.tar.gz
+  - curl -Lo go1.18.4.linux-amd64.tar.gz https://go.dev/dl/go1.18.4.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz && rm go1.18.4.linux-amd64.tar.gz
   - vim +'PlugInstall --sync' +qa
   - vim +GoInstallBinaries +'CocInstall coc-json' +qa
   - python3 -m pip install pynvim
