@@ -1,4 +1,5 @@
 #cloud-config
+write_files:
   - path: /root/.bashrc
     append: true
     content: |
