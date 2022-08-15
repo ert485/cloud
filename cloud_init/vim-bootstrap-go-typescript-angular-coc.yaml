@@ -3,6 +3,7 @@ write_files:
   - path: /root/.bashrc
     append: true
     content: |
+    
         # ert485 - default editor = vim
         export EDITOR=vim
         
