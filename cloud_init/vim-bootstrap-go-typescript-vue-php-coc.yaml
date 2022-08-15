@@ -4,8 +4,12 @@ write_files:
     append: true
     content: |
         
+        # ert485 - default editor = vim
+        export EDITOR=vim
+        
         # ert485 - allow git to ask for a password (if you want to use personal access tokens instead of SSH)
         export GIT_TERMINAL_PROMPT=1
+        
         # ert485 - add gobin to path
         export GOBIN=$HOME/go/bin
         export PATH=$PATH:$GOBIN
